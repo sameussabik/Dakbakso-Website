@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Dakbakso</title>
+<meta name="description" content="Start a project with Dakbakso Agency.">
+<link rel="icon" href="https://i.ibb.co.com/9m8gVGqJ/2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="noise-line" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="index.html" class="brand">
+      <img src="https://i.ibb.co.com/9m8gVGqJ/2.png" alt="Dakbakso" class="brand-mark">
+      <span class="brand-name">Dakbakso</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="work.html">Work</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="academy.html">Academy</a>
+      <a href="contact.html" class="nav-cta">Start a project</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="order">
+    <div class="wrap order-grid">
+      <div class="order-copy reveal">
+        <p class="eyebrow-plain">Contact</p>
+        <h2>Tell us about your project</h2>
+        <p>Fill this in and we'll get back to you within a day, usually over WhatsApp or email.</p>
+        <div class="order-contact">
+          <a href="mailto:contact@dakbakso.com">contact@dakbakso.com</a>
+          <a href="https://wa.me/8801314514228" target="_blank" rel="noopener">WhatsApp: 01314-514228</a>
+        </div>
+        <div class="order-badges">
+          <span>bKash</span><span>Nagad</span><span>Rocket</span><span>Bank</span><span>Card</span>
+        </div>
+      </div>
+
+      <form class="order-form reveal" id="orderForm">
+        <div class="form-row">
+          <label for="service">Service</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Choose a service</option>
+            <option>Website Development</option>
+            <option>UI/UX &amp; Product Design</option>
+            <option>Web &amp; Business Solutions</option>
+            <option>Website Maintenance &amp; Support</option>
+            <option>AI &amp; Automation</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-row form-row-split">
+          <div>
+            <label for="package">Package</label>
+            <select id="package" name="package">
+              <option value="" disabled selected>Choose a package</option>
+              <option>Starter</option>
+              <option>Growth</option>
+              <option>Pro / Custom</option>
+              <option>Maintenance</option>
+            </select>
+          </div>
+          <div>
+            <label for="budget">Budget (optional)</label>
+            <input type="text" id="budget" name="budget" placeholder="e.g. ৳25,000 or $200">
+          </div>
+        </div>
+
+        <div class="form-row form-row-split">
+          <div>
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Rakib Hasan" required>
+          </div>
+          <div>
+            <label for="contact">Phone / WhatsApp</label>
+            <input type="text" id="contact" name="contact" placeholder="017XXXXXXXX" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com">
+        </div>
+
+        <div class="form-row">
+          <label for="details">Project details</label>
+          <textarea id="details" name="details" rows="4" placeholder="What are you trying to build? A restaurant website, an online store, an automation for lead follow-up..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="orderSubmit">Send request</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="https://i.ibb.co.com/4RZMKND4/1.png" alt="Dakbakso" class="footer-mark">
+      <p>Dakbakso is a small studio building the digital groundwork for growing businesses — starting with the agency, with an academy and a few other things on the way.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Studio</p>
+      <a href="services.html">Services</a>
+      <a href="work.html">Work</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Get a quote</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Contact</p>
+      <a href="mailto:contact@dakbakso.com">contact@dakbakso.com</a>
+      <a href="https://wa.me/8801314514228" target="_blank" rel="noopener">01314-514228</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Coming from Dakbakso</p>
+      <a href="academy.html">Academy — coming soon</a>
+      <span class="footer-muted">Game studio — in the works</span>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> Dakbakso. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
