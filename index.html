@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dakbakso — Websites, Design & AI Automation</title>
 <meta name="description" content="Dakbakso builds websites, landing pages, product design and AI automation for growing businesses.">
-<link rel="icon" href="https://i.ibb.co.com/9m8gVGqJ/2.png">
+<link rel="icon" href="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <header class="site-header">
   <div class="wrap header-row">
     <a href="index.html" class="brand">
-      <img src="https://i.ibb.co.com/9m8gVGqJ/2.png" alt="Dakbakso" class="brand-mark">
+      <img src="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png" alt="Dakbakso" class="brand-mark">
       <span class="brand-name">Dakbakso</span>
     </a>
     <nav class="main-nav" id="mainNav">
@@ -27,6 +27,7 @@
       <a href="work.html">Work</a>
       <a href="pricing.html">Pricing</a>
       <a href="academy.html">Academy</a>
+      <a href="blog.html">Blog</a>
       <a href="contact.html" class="nav-cta">Start a project</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
@@ -56,26 +57,29 @@
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <svg viewBox="0 0 420 420" class="hero-svg">
-          <rect x="40" y="60" width="240" height="160" rx="6" fill="none" stroke="#0F2C59" stroke-width="2"/>
-          <rect x="40" y="60" width="240" height="28" fill="#0F2C59"/>
-          <circle cx="56" cy="74" r="4" fill="#F4F6F8"/>
-          <circle cx="70" cy="74" r="4" fill="#F4F6F8"/>
-          <circle cx="84" cy="74" r="4" fill="#F4F6F8"/>
-          <line x1="60" y1="110" x2="220" y2="110" stroke="#0F2C59" stroke-width="2"/>
-          <line x1="60" y1="132" x2="260" y2="132" stroke="#C7CFDB" stroke-width="2"/>
-          <line x1="60" y1="154" x2="240" y2="154" stroke="#C7CFDB" stroke-width="2"/>
-          <rect x="60" y="176" width="90" height="26" rx="4" fill="#FF6B35"/>
-          <rect x="120" y="230" width="220" height="150" rx="6" fill="#0F2C59"/>
-          <path d="M150 300 L185 265 L215 295 L260 250 L300 290" fill="none" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="150" cy="300" r="5" fill="#F4F6F8"/>
-          <circle cx="185" cy="265" r="5" fill="#F4F6F8"/>
-          <circle cx="215" cy="295" r="5" fill="#F4F6F8"/>
-          <circle cx="260" cy="250" r="5" fill="#F4F6F8"/>
-          <circle cx="300" cy="290" r="5" fill="#F4F6F8"/>
-          <rect x="150" y="330" width="150" height="14" rx="7" fill="#F4F6F8" opacity="0.35"/>
-          <rect x="150" y="352" width="90" height="14" rx="7" fill="#F4F6F8" opacity="0.2"/>
-        </svg>
+        <div class="hero-stack">
+          <div class="hero-stack-inner">
+            <div class="hero-panel hero-panel-back">
+              <div class="dot-row"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="fake-line"></div>
+              <div class="fake-line"></div>
+              <div class="fake-line"></div>
+            </div>
+            <div class="hero-panel hero-panel-mid">
+              <div class="mid-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              </div>
+              <p class="mid-title">Automation live</p>
+              <p class="mid-sub">Lead follow-up running</p>
+            </div>
+            <div class="hero-panel hero-panel-front">
+              <div class="code-dots"><span></span><span></span><span></span></div>
+              <div class="code-line c1"></div>
+              <div class="code-line c2"></div>
+              <div class="code-line c3"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -124,6 +128,31 @@
     </div>
   </section>
 
+  <section class="code-section">
+    <div class="wrap code-grid">
+      <div class="code-copy reveal">
+        <p class="eyebrow-plain">How it's actually built</p>
+        <h2>Hand-written code, not a drag-and-drop template.</h2>
+        <p>Every project is built with real HTML, CSS and JavaScript underneath — which means it's faster, easier to customise, and doesn't fight you when your business grows past what a template can do.</p>
+      </div>
+      <div class="code-window reveal">
+        <div class="code-window-bar"><span></span><span></span><span></span></div>
+        <div class="code-window-body">
+<div><span class="tok-com">// automation trigger for new orders</span></div>
+<div><span class="tok-key">function</span> <span class="tok-plain">onNewOrder</span>(<span class="tok-attr">order</span>) {</div>
+<div>  <span class="tok-key">const</span> <span class="tok-plain">sheet</span> = <span class="tok-plain">getOrdersSheet</span>();</div>
+<div>  sheet.<span class="tok-plain">appendRow</span>([</div>
+<div>    order.<span class="tok-attr">name</span>,</div>
+<div>    order.<span class="tok-attr">service</span>,</div>
+<div>    <span class="tok-str">"new"</span></div>
+<div>  ]);</div>
+<div>  <span class="tok-plain">notifyOwner</span>(order); <span class="tok-com">// WhatsApp ping</span></div>
+<div>}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="work" id="work">
     <div class="wrap">
       <div class="section-head reveal">
@@ -135,6 +164,33 @@
       </div>
       <div class="section-foot reveal">
         <a href="work.html" class="btn btn-ghost">See all work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Based in Bangladesh, built for anywhere.</h2>
+        <p>Dakbakso works with local businesses face-to-face and with international clients entirely over chat and email — same process, same quality either way.</p>
+      </div>
+      <div class="globe-wrap reveal">
+        <svg viewBox="0 0 420 300" class="globe" aria-hidden="true">
+          <ellipse class="globe-ring" cx="210" cy="150" rx="170" ry="170"/>
+          <ellipse class="globe-ring" cx="210" cy="150" rx="170" ry="60"/>
+          <ellipse class="globe-ring" cx="210" cy="150" rx="95" ry="170"/>
+          <line class="globe-ring" x1="40" y1="150" x2="380" y2="150"/>
+          <g class="globe-pin-main">
+            <circle class="pulse" cx="180" cy="130" r="6"/>
+            <circle cx="180" cy="130" r="5"/>
+          </g>
+          <text class="globe-label-main" x="192" y="126">Dhaka, Bangladesh</text>
+          <text class="globe-label" x="192" y="142">home base</text>
+          <circle cx="300" cy="90" r="3.5" fill="#C7CFDB"/>
+          <circle cx="330" cy="190" r="3.5" fill="#C7CFDB"/>
+          <circle cx="90" cy="80" r="3.5" fill="#C7CFDB"/>
+          <text class="globe-label" x="215" y="270" text-anchor="middle">remote-friendly — open to clients worldwide</text>
+        </svg>
       </div>
     </div>
   </section>
@@ -152,7 +208,7 @@
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img src="https://i.ibb.co.com/4RZMKND4/1.png" alt="Dakbakso" class="footer-mark">
+      <img src="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png" alt="Dakbakso" class="footer-mark">
       <p>Dakbakso is a small studio building the digital groundwork for growing businesses — starting with the agency, with an academy and a few other things on the way.</p>
     </div>
     <div class="footer-col">

@@ -2,6 +2,7 @@
 const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbz89GiiNWUixWYu5Q1VI_-DohczJhXw9VS99Yn1l_Vlm31Yq3Dt4mDef1rVs_EVZfCU/exec";
 // Portfolio CSV link must end in "output=csv" (not "pubhtml") — see setup guide.
 const PORTFOLIO_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGbZLDjmoy2UszGKkcLachHTqDNMStPwhbGg00-mx6oxK12ZzbHIrt4eb8p5KT_GPjWx70jnE-qW3H/pub?gid=0&single=true&output=csv";
+const BLOG_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGbZLDjmoy2UszGKkcLachHTqDNMStPwhbGg00-mx6oxK12ZzbHIrt4eb8p5KT_GPjWx70jnE-qW3H/pub?gid=1999701892&single=true&output=csv";
 
 // ---------- SERVICES DATA ----------
 const SERVICES = [
@@ -44,8 +45,9 @@ function renderServices(targetId, limit){
   if (!grid) return;
   const list = limit ? SERVICES.slice(0, limit) : SERVICES;
 
-  grid.innerHTML = list.map((s) => `
+  grid.innerHTML = list.map((s, i) => `
     <div class="service-card stagger-item">
+      <span class="service-index">${String(i + 1).padStart(2, "0")}</span>
       <div class="service-icon">${s.icon}</div>
       <h3>${s.name}</h3>
       <p>${s.desc}</p>
@@ -65,18 +67,44 @@ function renderServices(targetId, limit){
   });
 }
 
-// ---------- PORTFOLIO ----------
+// ---------- CSV PARSER ----------
+// Handles quoted fields, commas inside quotes, escaped quotes (""), and
+// multi-line content inside quotes — needed for blog post bodies.
+function parseCSV(text){
+  const rows = [];
+  let row = [], field = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (inQuotes){
+      if (c === '"'){
+        if (text[i + 1] === '"'){ field += '"'; i++; }
+        else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else {
+      if (c === '"'){ inQuotes = true; }
+      else if (c === ","){ row.push(field); field = ""; }
+      else if (c === "\n"){ row.push(field); rows.push(row); row = []; field = ""; }
+      else if (c === "\r"){ /* skip, \n handles the row break */ }
+      else { field += c; }
+    }
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r => r.length && r.some(v => v.trim() !== ""));
+}
+
 function csvToRows(csvText){
-  const lines = csvText.trim().split("\n");
-  const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
-  return lines.slice(1).map(line => {
-    const cols = line.split(",");
+  const table = parseCSV(csvText.trim());
+  const headers = table[0].map(h => h.trim().toLowerCase());
+  return table.slice(1).map(cols => {
     const row = {};
     headers.forEach((h, i) => { row[h] = (cols[i] || "").trim(); });
     return row;
   });
 }
 
+// ---------- PORTFOLIO ----------
 async function loadPortfolio(targetId, limit){
   const grid = document.getElementById(targetId);
   if (!grid) return;
@@ -120,6 +148,67 @@ function renderPortfolioFallback(grid, limit){
   grid.innerHTML = html;
 }
 
+// ---------- BLOG ----------
+async function loadBlogList(targetId){
+  const grid = document.getElementById(targetId);
+  if (!grid) return;
+
+  if (!BLOG_CSV_URL || BLOG_CSV_URL.startsWith("PASTE_")) return; // keep the static teaser cards already in the HTML
+
+  try {
+    const res = await fetch(BLOG_CSV_URL);
+    if (!res.ok) throw new Error("blog fetch failed");
+    const rows = csvToRows(await res.text()).filter(r => r.title && r.slug);
+    if (rows.length === 0) return;
+
+    rows.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+    grid.innerHTML = rows.map(r => `
+      <a class="portfolio-card stagger-item" href="post.html?slug=${encodeURIComponent(r.slug)}">
+        <div class="portfolio-body">
+          <span class="portfolio-tag">${r.category || "Blog"}</span>
+          <h3>${r.title}</h3>
+          <p>${r.summary || ""}</p>
+        </div>
+      </a>
+    `).join("");
+  } catch (err){
+    // leave the static teaser cards in place if the fetch fails
+  }
+}
+
+async function loadBlogPost(){
+  const el = document.getElementById("postContent");
+  if (!el) return;
+
+  const slug = new URLSearchParams(location.search).get("slug");
+  if (!slug){ el.innerHTML = "<p>No post specified.</p>"; return; }
+
+  if (!BLOG_CSV_URL || BLOG_CSV_URL.startsWith("PASTE_")){
+    el.innerHTML = "<p>Blog isn't connected yet — set BLOG_CSV_URL in script.js.</p>";
+    return;
+  }
+
+  try {
+    const res = await fetch(BLOG_CSV_URL);
+    const rows = csvToRows(await res.text());
+    const post = rows.find(r => r.slug === slug);
+    if (!post){ el.innerHTML = "<p>Post not found.</p>"; return; }
+
+    document.title = `${post.title} — Dakbakso Blog`;
+    const paragraphs = (post.content || "").split(/\n+/).filter(p => p.trim()).map(p => `<p>${p}</p>`).join("");
+
+    el.innerHTML = `
+      <span class="portfolio-tag">${post.category || "Blog"}</span>
+      <h1>${post.title}</h1>
+      <p class="post-date">${post.date || ""}</p>
+      <div class="post-body">${paragraphs}</div>
+    `;
+  } catch (err){
+    el.innerHTML = "<p>Couldn't load this post right now.</p>";
+  }
+}
+
 // ---------- ORDER FORM ----------
 function initOrderForm(){
   const form = document.getElementById("orderForm");
@@ -160,6 +249,41 @@ function initOrderForm(){
       submitBtn.disabled = false;
       submitBtn.textContent = "Send request";
     }
+  });
+}
+
+// ---------- CURRENCY TOGGLE ----------
+function initCurrencyToggle(){
+  const wrap = document.getElementById("currencyToggle");
+  if (!wrap) return;
+  const buttons = wrap.querySelectorAll(".curr-btn");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.body.classList.toggle("currency-bdt", btn.dataset.currency === "bdt");
+    });
+  });
+}
+
+// ---------- 3D TILT ----------
+function initTilt(){
+  if (typeof window.matchMedia !== "function") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(hover: none)").matches) return; // skip on touch devices
+
+  document.querySelectorAll(".service-card").forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * -10;
+      const rotateY = ((x / rect.width) - 0.5) * 10;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0) rotateY(0) translateY(0)";
+    });
   });
 }
 
@@ -215,8 +339,12 @@ document.addEventListener("DOMContentLoaded", () => {
   renderServices("serviceGridFull");
   loadPortfolio("portfolioGridHome", 3);
   loadPortfolio("portfolioGridFull");
+  loadBlogList("blogGrid");
+  loadBlogPost();
   initOrderForm();
   initNav();
   initFooterYear();
   initReveal();
+  initCurrencyToggle();
+  initTilt();
 });
