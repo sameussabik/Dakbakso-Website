@@ -165,6 +165,7 @@ async function loadBlogList(targetId){
 
     grid.innerHTML = rows.map(r => `
       <a class="portfolio-card stagger-item" href="post.html?slug=${encodeURIComponent(r.slug)}">
+        ${r["image url"] ? `<div class="portfolio-thumb-wrap"><img class="portfolio-thumb" src="${r["image url"]}" alt="${r.title}" loading="lazy"></div>` : ""}
         <div class="portfolio-body">
           <span class="portfolio-tag">${r.category || "Blog"}</span>
           <h3>${r.title}</h3>
@@ -196,13 +197,24 @@ async function loadBlogPost(){
     if (!post){ el.innerHTML = "<p>Post not found.</p>"; return; }
 
     document.title = `${post.title} — Dakbakso Blog`;
-    const paragraphs = (post.content || "").split(/\n+/).filter(p => p.trim()).map(p => `<p>${p}</p>`).join("");
+    const blocks = (post.content || "").split(/\n+/).filter(b => b.trim());
+    const body = blocks.map(block => {
+      const b = block.trim();
+      const imgLeft = b.match(/^\[img-left:(.+)\]$/i);
+      const imgRight = b.match(/^\[img-right:(.+)\]$/i);
+      const imgFull = b.match(/^\[img:(.+)\]$/i);
+      if (imgLeft) return `<img class="post-inline-img float-left" src="${imgLeft[1].trim()}" alt="">`;
+      if (imgRight) return `<img class="post-inline-img float-right" src="${imgRight[1].trim()}" alt="">`;
+      if (imgFull) return `<img class="post-inline-img" src="${imgFull[1].trim()}" alt="">`;
+      return `<p>${b}</p>`;
+    }).join("");
 
     el.innerHTML = `
+      ${post["image url"] ? `<img class="post-image" src="${post["image url"]}" alt="${post.title}">` : ""}
       <span class="portfolio-tag">${post.category || "Blog"}</span>
       <h1>${post.title}</h1>
       <p class="post-date">${post.date || ""}</p>
-      <div class="post-body">${paragraphs}</div>
+      <div class="post-body">${body}</div>
     `;
   } catch (err){
     el.innerHTML = "<p>Couldn't load this post right now.</p>";
