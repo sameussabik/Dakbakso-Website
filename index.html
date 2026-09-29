@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dakbakso — Websites, Design & AI Automation</title>
 <meta name="description" content="Dakbakso builds websites, landing pages, product design and AI automation for growing businesses.">
-<link rel="icon" href="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png">
+<link rel="icon" href="https://i.ibb.co.com/ZpDxNXVH/2b6fec6c-6a75-4a8e-8b6d-21cc80cc1419-20260929-125306-0000.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 <header class="site-header">
   <div class="wrap header-row">
     <a href="index.html" class="brand">
-      <img src="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png" alt="Dakbakso" class="brand-mark">
+      <img src="https://i.ibb.co.com/ZpDxNXVH/2b6fec6c-6a75-4a8e-8b6d-21cc80cc1419-20260929-125306-0000.png" alt="Dakbakso" class="brand-mark">
       <span class="brand-name">Dakbakso</span>
     </a>
     <nav class="main-nav" id="mainNav">
@@ -36,6 +36,19 @@
   </div>
 </header>
 
+<div class="mobile-overlay" id="mobileOverlay">
+  <nav class="mobile-links">
+    <a href="index.html" style="--d:0">Home</a>
+    <a href="services.html" style="--d:1">Services</a>
+    <a href="work.html" style="--d:2">Work</a>
+    <a href="pricing.html" style="--d:3">Pricing</a>
+    <a href="academy.html" style="--d:4">Academy</a>
+    <a href="blog.html" style="--d:5">Blog</a>
+  </nav>
+  <a href="contact.html" class="btn btn-primary btn-full mobile-cta" style="--d:6">Start a project</a>
+</div>
+
+
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span>Website Development</span><span>UI/UX Design</span><span>Web & Business Solutions</span><span>Maintenance & Support</span><span>AI & Automation</span>
@@ -45,41 +58,22 @@
 
 <main>
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow-plain">A Dakbakso studio</p>
-        <h1>Websites and automation, built for businesses that are just getting started.</h1>
-        <p class="hero-sub">Dakbakso Agency designs and builds websites, landing pages and AI-driven workflows — the kind of groundwork a growing business actually needs first, done properly instead of rushed.</p>
-        <div class="hero-actions">
-          <a href="contact.html" class="btn btn-primary">Start a project</a>
-          <a href="work.html" class="btn btn-ghost">See the work</a>
-        </div>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-stack">
-          <div class="hero-stack-inner">
-            <div class="hero-panel hero-panel-back">
-              <div class="dot-row"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-              <div class="fake-line"></div>
-              <div class="fake-line"></div>
-              <div class="fake-line"></div>
-            </div>
-            <div class="hero-panel hero-panel-mid">
-              <div class="mid-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-              </div>
-              <p class="mid-title">Automation live</p>
-              <p class="mid-sub">Lead follow-up running</p>
-            </div>
-            <div class="hero-panel hero-panel-front">
-              <div class="code-dots"><span></span><span></span><span></span></div>
-              <div class="code-line c1"></div>
-              <div class="code-line c2"></div>
-              <div class="code-line c3"></div>
-            </div>
-          </div>
-        </div>
+  <section class="hero-full">
+    <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+    <div class="wrap hero-full-inner">
+      <p class="eyebrow-plain eyebrow-light">A Dakbakso studio</p>
+      <h1 class="hero-headline">Websites <em>and</em> automation<br>for businesses <em>ready</em><br>to grow.</h1>
+      <p class="hero-full-sub">Dakbakso Agency designs and builds websites, landing pages and AI-driven workflows — the kind of groundwork a growing business actually needs first, done properly instead of rushed.</p>
+      <div class="hero-actions hero-actions-center">
+        <a href="contact.html" class="btn btn-light">
+          Start a project
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="work.html" class="btn btn-outline-light">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="btn-icon"><path d="M8 5v14l11-7z"/></svg>
+          See the work
+        </a>
       </div>
     </div>
   </section>
@@ -208,7 +202,7 @@
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img src="https://i.ibb.co.com/cX2z8VMV/Black-and-White-Modern-Corporate-Letter-D-Logo-1.png" alt="Dakbakso" class="footer-mark">
+      <img src="https://i.ibb.co.com/ZpDxNXVH/2b6fec6c-6a75-4a8e-8b6d-21cc80cc1419-20260929-125306-0000.png" alt="Dakbakso" class="footer-mark">
       <p>Dakbakso is a small studio building the digital groundwork for growing businesses — starting with the agency, with an academy and a few other things on the way.</p>
     </div>
     <div class="footer-col">

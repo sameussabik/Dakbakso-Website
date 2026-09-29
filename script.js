@@ -303,18 +303,29 @@ function initTilt(){
 function initNav(){
   const toggle = document.getElementById("navToggle");
   const nav = document.getElementById("mainNav");
-  if (!toggle || !nav) return;
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open);
-  });
-  nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-    nav.classList.remove("open");
+  const overlay = document.getElementById("mobileOverlay");
+  if (!toggle) return;
+
+  const closeMenu = () => {
+    toggle.classList.remove("open");
     toggle.setAttribute("aria-expanded", false);
-  }));
+    if (overlay) overlay.classList.remove("open");
+    document.body.classList.remove("menu-open");
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", isOpen);
+    if (overlay) overlay.classList.toggle("open", isOpen);
+    document.body.classList.toggle("menu-open", isOpen);
+  });
+
+  if (overlay){
+    overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+  }
 
   const current = location.pathname.split("/").pop() || "index.html";
-  nav.querySelectorAll("a[href]").forEach(a => {
+  document.querySelectorAll(".main-nav a[href], .mobile-links a[href]").forEach(a => {
     const href = a.getAttribute("href");
     if (href === current || (current === "" && href === "index.html")){
       a.classList.add("active");

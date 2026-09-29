@@ -65,9 +65,15 @@
 ## ব্লগ চালু করা (নতুন)
 
 1. একই Google Sheet এ আরেকটা ট্যাব বানাও, নাম দাও **Blog**।
-2. `sheet-templates/Blog_template.csv` ফাইলটা import করো (headers + একটা real sample post সহ)। কলাম: `title, category, date, summary, content, slug`
+2. `sheet-templates/Blog_template.csv` ফাইলটা import করো (headers + একটা real sample post সহ)। কলাম: `title, category, date, summary, content, slug, image url`
    - **slug** হলো URL-friendly নাম, যেমন `landing-page-vs-website` — স্পেস/স্পেশাল ক্যারেক্টার ছাড়া, সব lowercase, হাইফেন দিয়ে যুক্ত।
    - **content** এ প্যারাগ্রাফ আলাদা করতে দুইটা এন্টার (blank line) দাও — Sheet এর সেলের ভেতরে Alt+Enter চেপে নতুন লাইন শুরু করতে হবে।
+   - **image url** ঐচ্ছিক — এটাই পোস্টের প্রধান/কভার ছবি, ibb.co তে আপলোড করে লিংক বসাও। লিস্ট কার্ডে থাম্বনেইল আর পোস্টের উপরে বড় করে দেখাবে।
+   - **লেখার মাঝে বা পাশে ছবি বসাতে চাইলে**, content এর ভেতরে (নিজের একটা আলাদা লাইনে/প্যারাগ্রাফে) এই ফরম্যাটে লিখো:
+     - `[img:ছবির-লিংক]` — পুরো width জুড়ে, লেখার মাঝে
+     - `[img-left:ছবির-লিংক]` — বাম পাশে ছোট করে, লেখা ডান পাশ দিয়ে wrap করবে
+     - `[img-right:ছবির-লিংক]` — একইভাবে ডান পাশে
+     - `Blog_template.csv` এ example হিসেবে এই তিন ধরনের ব্যবহারই দেখানো আছে
 3. **Blog** ট্যাবে থাকা অবস্থায়: **File > Share > Publish to web** — Sheet হিসেবে বেছে নাও **Blog**, ফরম্যাট **CSV**, Publish করো, লিংক কপি করো।
 4. `script.js` এ এই লাইনে বসাও:
    ```js
